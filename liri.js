@@ -2,8 +2,8 @@ var fs = require("fs");
 require("dotenv").config();
 var axios = require("axios");
 var keys = require("./keys.js");
-//var Spotify = require('node-spotify-api');
-//var spotify = new Spotify(keys.spotify);
+var moment = require('moment'); 
+moment().format();
 var input = process.argv.slice(3).join(" ");
 
 var command = process.argv[2];
@@ -44,7 +44,9 @@ function concertThis(){
         console.log(`${input}'s Next Show!!!`)
         console.log(`Venue: ${response.data[0].venue.name}`);
         console.log(`Venue Location: ${response.data[0].venue.location}`);
-        console.log(`Date: ${response.data[0].datetime}`);
+        var dateTime = response.data[0].datetime; //isolating date time data
+        var dateArray = dateTime.split('T'); //isolating date
+        console.log(`Date: ${moment(dateArray[0]).format('MM/DD/YYYY')}`); //correctly displaying date
       });
 }
 
