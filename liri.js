@@ -79,16 +79,19 @@ var queryUrl = `http://www.omdbapi.com/?t= ${input} &y=&plot=short&apikey=trilog
 axios.get(queryUrl).then(
   function(response) {
     //console.log(response.data);
-    console.log(
-        "Title: ", response.data.Title, '\n',
-        "Year: ", response.data.Year, '\n',
-        "IMDB Rating: ", response.data.imdbRating, '\n',
-        "Rotten Tomatoes Rating: ", response.data.Ratings[1].Value, '\n',
-        "Country of Production: ", response.data.Country, '\n',
-        "Languages: ", response.data.Language, '\n',
-        "Plot: ", response.data.Plot, '\n',
-        "Cast: ", response.data.Actors 
-        );
+    //console.log(response.data);
+    console.log("Title: ", response.data.Title);
+    console.log("Year: ", response.data.Year);
+    console.log("IMDB Rating: ", response.data.imdbRating);
+    if (response.data.Ratings[1] == null){
+      console.log("Rotten Tomatoes Rating: Not Available");
+    } else {
+      console.log("Rotten Tomatoes Rating: ", response.data.Ratings[1].Value);
+    }
+    console.log("Country of Production: ", response.data.Country);
+    console.log("Languages: ", response.data.Language);
+    console.log("Plot: ", response.data.Plot);
+    console.log("Cast: ", response.data.Actors); 
   })
   .catch(function(error) {
     if (error.response) {
